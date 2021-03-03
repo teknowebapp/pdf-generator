@@ -47,12 +47,12 @@ class Welcome extends CI_Controller {
 
 			// generate pdf file in this server
 			$html = $this->load->view('cetak-matkul', $data, true);
-			$filename = $this->input->get('mhs').'_'.$this->input->get('smt').'.pdf';
+			$filename = "krs_".$this->input->get('mhs').'_'.$this->input->get('smt').'.pdf';
 			$this->generatepdf->save($html, $filename, 'A4', 'portrait');
 
 			// show pdf file in browser
 			$this->pdf->setPaper('A4', 'potrait');
-			$this->pdf->filename = "pengajuan-disdik-".date('d-m-Y').".pdf";
+			$this->pdf->filename = "cetak-krs-".date('d-m-Y').".pdf";
 			$this->pdf->load_view('cetak-matkul', $data);
 
 		} else {
