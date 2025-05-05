@@ -46,11 +46,11 @@
                 </tr>
             </thead>
             <tbody>
-                <?php $no = 0; foreach ($lesson as $data): $no++; ?>
+                <?php $no = 0; foreach ($course as $data): $no++; ?>
                 <tr>
                     <td class="text-center"><?= $no;?></td>
                     <td class="text-center"><?= $data->code;?></td>
-                    <td class="text-center"><?= $data->name;?></td>
+                    <td class="text-center"><?= $data->lesson;?></td>
                     <td class="text-center"><?= $data->periode;?></td>
                 </tr>
                 <?php endforeach;?>
