@@ -1,6 +1,6 @@
 # PDF Generator
 
-A simple PDF generation system using CodeIgniter 3. Supports two main features:
+A simple PDF generation system using CodeIgniter 3 to Preview or force download and Automatically saves generated PDF to a folder.
 
 ## Features
 
