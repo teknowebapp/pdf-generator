@@ -4,7 +4,7 @@ use Dompdf\Adapter\CPDF;
 use Dompdf\Dompdf;
 use Dompdf\Exception;
 
-class Generatepdf
+class Generator
 {
     public function generate($html, $filename = "", $stream = true, $paper = 'A4', $orientation = "portrait")
     {
@@ -34,6 +34,6 @@ class Generatepdf
         $dompdf->render();
         $output = $dompdf->output();
 
-        file_put_contents($_SERVER["DOCUMENT_ROOT"] . '/pdf/assets/pdf/' . $filename, $output);
+        file_put_contents($_SERVER["DOCUMENT_ROOT"] . '/assets/pdf/' . $filename, $output);
     }
 }
