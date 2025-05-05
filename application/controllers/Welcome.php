@@ -28,35 +28,37 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
-		$data['detail'] = $this->welcome->get_matkul();
+		$data['course'] = $this->welcome->get_course();
 
 		$this->load->view('welcome_message', $data);
 	}
 	
-	public function cetak()
+	public function generate()
 	{
 		$this->load->library('pdf');
-		$this->load->library('generatepdf');
+		$this->load->library('generator');
 
-		$cek = $this->welcome->get_cetak_matkul($this->input->get('mhs'), $this->input->get('smt'))->row();
+		$student = $this->input->get('student');
+		$periode = $this->input->get('periode');
+		$check = $this->welcome->get_print_course($student, $periode)->row();
 
-		if($cek)
+		if($check)
 		{
-			$data['detail'] = $cek;
-			$data['matkul'] = $this->welcome->get_cetak_matkul($this->input->get('mhs'), $this->input->get('smt'))->result();
+			$data = [
+				'student' => $check,
+				'lesson' => $this->welcome->get_print_course($student, $periode)->result()
+			];
 
 			// generate pdf file in this server
-			$html = $this->load->view('cetak-matkul', $data, true);
-			$filename = "krs_".$this->input->get('mhs').'_'.$this->input->get('smt').'.pdf';
-			$this->generatepdf->save($html, $filename, 'A4', 'portrait');
+			$html = $this->load->view('generator', $data, true);
+			$filename = 'course-' . $student . ' - ' . $periode . '.pdf';
+			$this->generator->save($html, $filename, 'A4', 'portrait');
 
 			// show pdf file in browser
 			$this->pdf->setPaper('A4', 'potrait');
-			$this->pdf->filename = "cetak-krs-".date('d-m-Y').".pdf";
-			$this->pdf->load_view('cetak-matkul', $data);
-
+			$this->pdf->filename = 'course-' . date('d-m-Y') . '.pdf';
+			$this->pdf->generate('generator', $data);
 		} else {
-
 			show_404();
 		}
 	}
