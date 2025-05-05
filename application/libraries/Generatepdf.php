@@ -16,7 +16,9 @@ class Generatepdf
         $dompdf->render();
 
         if ($stream) {
-            $dompdf->stream($filename, array("Attachment" => 0));
+            $dompdf->stream($filename, [
+                'Attachment' => 0
+            ]);
         } else {
             return $dompdf->output();
         }
