@@ -46,7 +46,7 @@ class Welcome extends CI_Controller {
 		{
 			$data = [
 				'student' => $check,
-				'lesson' => $this->welcome->get_print_course($student, $periode)->result()
+				'course' => $this->welcome->get_print_course($student, $periode)->result()
 			];
 
 			// generate pdf file in this server
