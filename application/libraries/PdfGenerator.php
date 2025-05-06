@@ -4,7 +4,7 @@ use Dompdf\Adapter\CPDF;
 use Dompdf\Dompdf;
 use Dompdf\Exception;
 
-class Generator
+class PdfGenerator
 {
     public function generate($html, $filename = "", $stream = true, $paper = 'A4', $orientation = "portrait")
     {

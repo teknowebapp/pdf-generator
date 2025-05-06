@@ -36,7 +36,7 @@ class Welcome extends CI_Controller {
 	public function generate()
 	{
 		$this->load->library('pdf');
-		$this->load->library('generator');
+		$this->load->library('pdfgenerator');
 
 		$student = $this->input->get('student');
 		$periode = $this->input->get('periode');
@@ -51,12 +51,12 @@ class Welcome extends CI_Controller {
 
 			// generate pdf file in this server
 			$html = $this->load->view('generator', $data, true);
-			$filename = 'course-' . $student . ' - ' . $periode . '.pdf';
-			$this->generator->save($html, $filename, 'A4', 'portrait');
+			$filename = 'course-print-' . date('Ymd') . '.pdf';
+			$this->pdfgenerator->save($html, $filename, 'A4', 'portrait');
 
 			// show pdf file in browser
 			$this->pdf->setPaper('A4', 'potrait');
-			$this->pdf->filename = 'course-' . date('d-m-Y') . '.pdf';
+			$this->pdf->filename = 'course-generated-' . date('dmY') . '.pdf';
 			$this->pdf->generate('generator', $data);
 		} else {
 			show_404();
